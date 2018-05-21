@@ -33,8 +33,8 @@ public class MoneyTransferResource {
         Account sourceAccount = accountDAO.getAndLock(transferTO.getSourceAccountId());
         Account destinationAccount = accountDAO.getAndLock(transferTO.getDestinationAccountId());
         Transfer transfer = new Transfer();
-        transferDAO.save(transfer);
         transfer.exchange(sourceAccount, destinationAccount, transferTO.getCents());
+        transferDAO.save(transfer);
     }
 
     @GET

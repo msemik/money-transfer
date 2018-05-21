@@ -8,7 +8,7 @@ import com.semik.moneytransfer.core.Transfer;
 import com.semik.moneytransfer.core.exception.BusinessExceptionMapper;
 import com.semik.moneytransfer.db.AccountDAO;
 import com.semik.moneytransfer.db.TransferDAO;
-import com.semik.moneytransfer.resources.AccountTransfer;
+import com.semik.moneytransfer.resources.AccountResource;
 import com.semik.moneytransfer.resources.MoneyTransferResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -37,8 +37,8 @@ public class MoneyTransferApplication extends Application<MoneyTransferConfigura
         JerseyEnvironment jersey = environment.jersey();
         MoneyTransferResource moneyTransferResource = new MoneyTransferResource(transferDAO, accountDAO);
         jersey.register(moneyTransferResource);
-        AccountTransfer accountTransfer = new AccountTransfer(accountDAO);
-        jersey.register(accountTransfer);
+        AccountResource accountResource = new AccountResource(accountDAO);
+        jersey.register(accountResource);
         jersey.register(new BusinessExceptionMapper());
 
     }

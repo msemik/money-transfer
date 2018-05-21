@@ -13,10 +13,10 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/account")
 @Produces(MediaType.APPLICATION_JSON)
-public class AccountTransfer {
+public class AccountResource {
     private AccountDAO accountDAO;
 
-    public AccountTransfer(AccountDAO accountDAO) {
+    public AccountResource(AccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
 

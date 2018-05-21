@@ -1,7 +1,7 @@
 package com.semik.moneytransfer.core;
 
 import com.semik.moneytransfer.api.TransferTO;
-import com.semik.moneytransfer.core.exception.TransferAmountMustBePositiveNumber;
+import com.semik.moneytransfer.core.exception.TransferAmountMustBePositiveNumberException;
 
 import javax.persistence.*;
 
@@ -76,7 +76,7 @@ public class Transfer {
 
     private void validateTransferredAmount(long cents) {
         if(cents <= 0) {
-            throw new TransferAmountMustBePositiveNumber();
+            throw new TransferAmountMustBePositiveNumberException();
         }
     }
 }

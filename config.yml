@@ -1,0 +1,25 @@
+logging:
+  level: INFO
+  loggers:
+    com.semik: DEBUG
+
+database:
+  driverClass: org.h2.Driver
+  user: sa
+#  password:
+  url: jdbc:h2:./moneytransferdb;AUTO_SERVER=TRUE
+  properties:
+    charSet: UTF-8
+  maxWaitForConnection: 1s
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
+  properties:
+    hibernate.dialect: org.hibernate.dialect.H2Dialect
+    hibernate.show_sql: true
+    hibernate.generate_statistics: false
+    hibernate.hbm2ddl.auto: create
+    hibernate.hbm2ddl.import_files: inital_accounts.sql

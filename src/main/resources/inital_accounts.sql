@@ -1,0 +1,1 @@
+INSERT INTO account(id, balanceInCents) VALUES (1,0), (2, 10), (3, 9223372036854775807)

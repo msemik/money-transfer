@@ -31,4 +31,8 @@ public class CustomerController {
     public Optional<Customer> findById(@PathVariable("id") Long id){
         return repository.findById(id);
     }
+    @GetMapping("byParam")
+    public Optional<Customer> findByName(@RequestParam("name") String name){
+        return repository.findByName(name);
+    }
 }

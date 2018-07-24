@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -50,5 +51,15 @@ public class CustomerController {
     @GetMapping("nativePageable")
     public Page<Customer> findByNativePageable(Pageable pageable) {
         return repository.findByNativeWithPagination(18L, pageable);
+    }
+
+    @PostMapping("rollback")
+    @Transactional
+    public Customer rollbackTest(@RequestBody @Valid Customer customer) {
+        Customer saved = repository.save(customer);
+        if(1 == 1){
+            throw new RuntimeException("Some shit happened");
+        }
+        return saved;
     }
 }

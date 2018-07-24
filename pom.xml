@@ -15,7 +15,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.3.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from jpaRepository -->
     </parent>
 
     <properties>
@@ -96,6 +96,12 @@
             <artifactId>wiremock</artifactId>
             <version>2.18.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>5.6.10</version> <!-- Invalid version because of bug occurring when use 6.3.1-->
+
         </dependency>
     </dependencies>
 

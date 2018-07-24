@@ -46,4 +46,9 @@ public class CustomerController {
         log.debug(pageable.toString());
         return repository.findByAgeIsGreaterThanEqual(18L, pageable);
     }
+
+    @GetMapping("nativePageable")
+    public Page<Customer> findByNativePageable(Pageable pageable) {
+        return repository.findByNativeWithPagination(18L, pageable);
+    }
 }

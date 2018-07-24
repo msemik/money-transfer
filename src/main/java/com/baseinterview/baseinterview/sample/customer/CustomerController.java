@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("sample/customer")
@@ -24,5 +25,10 @@ public class CustomerController {
     @GetMapping
     public List<Customer> findAll(){
         return repository.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Customer> findById(@PathVariable("id") Long id){
+        return repository.findById(id);
     }
 }

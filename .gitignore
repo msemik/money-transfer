@@ -26,4 +26,5 @@ hs_err_pid*
 **/target
 moneytransferdb.lock.db
 moneytransferdb.mv.db
+moneytransferdb.trace.db
 **/*.iml

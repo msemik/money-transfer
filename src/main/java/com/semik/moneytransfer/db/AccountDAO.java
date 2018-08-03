@@ -7,6 +7,8 @@ import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class AccountDAO extends AbstractDAO<Account> {
     private static int QUERY_TIMEOUT_SEC = 2;
 
@@ -26,5 +28,11 @@ public class AccountDAO extends AbstractDAO<Account> {
             throw new NoSuchAccountException(id);
         }
         return account;
+    }
+
+    public List<Account> getAll() {
+        return currentSession()
+                .createQuery("FROM Account")
+                .list();
     }
 }

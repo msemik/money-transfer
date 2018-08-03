@@ -1,1 +1,1 @@
-INSERT INTO account(id, balanceInCents) VALUES (1,0), (2, 10), (3, 9223372036854775807)
+INSERT INTO account(id, firstName, surname, balanceInCents) VALUES (1, 'Jolanta', 'Pusta', 0), (2, 'Grześ', 'Zworkiem', 10), (3, 'Jaś', 'Pełny', 9223372036854775807);

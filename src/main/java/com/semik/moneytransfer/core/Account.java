@@ -15,6 +15,10 @@ public class Account {
     @GeneratedValue
     private Long id;
 
+    private String firstName;
+
+    private String surname;
+
     private long balanceInCents = 0;
 
     public Account() {
@@ -28,6 +32,21 @@ public class Account {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     public long getBalanceInCents() {
         return balanceInCents;
@@ -37,7 +56,7 @@ public class Account {
         this.balanceInCents = balanceInCents;
     }
 
-    public void charge(long cents) {
+        public void charge(long cents) {
         if (balanceInCents - cents < 0) {
             throw new NoSufficientMeansException(balanceInCents, cents);
         }

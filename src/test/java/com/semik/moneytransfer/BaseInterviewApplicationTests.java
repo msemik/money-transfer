@@ -1,4 +1,4 @@
-package com.baseinterview.baseinterview;
+package com.semik.moneytransfer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,6 @@
-package com.semik.moneytransfer;
+package com.semik.moneytransfer.crosscutting.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,12 +15,19 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> ex(HttpServletRequest req, MethodArgumentNotValidException ex) {
-        return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(new ErrorMessage(httpStatus, ex), httpStatus);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> ex(HttpServletRequest req, Exception ex) {
         log.error("Unknown error", ex);
-        return new ResponseEntity<>("Unknown error", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Unknown error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> ex(HttpServletRequest req, BusinessException ex) {
+        HttpStatus status = HttpStatus.PRECONDITION_FAILED;
+        return new ResponseEntity<>(new ErrorMessage(status, ex), status);
     }
 }

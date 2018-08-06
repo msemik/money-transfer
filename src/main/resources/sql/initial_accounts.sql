@@ -1,0 +1,1 @@
+INSERT INTO account(id, first_name, surname, balance_in_cents) VALUES (1, 'Jolanta', 'Pusta', 0), (2, 'Grześ', 'Zworkiem', 10000), (3, 'Jaś', 'Pełny', 9223372036854775807);

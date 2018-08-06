@@ -2,7 +2,9 @@ package com.semik.moneytransfer.transfer;
 
 import com.semik.moneytransfer.account.Account;
 import com.semik.moneytransfer.account.AccountRepository;
+import com.semik.moneytransfer.transfer.event.TransferExchangedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,9 @@ public class MoneyTransferController {
     @Autowired
     private MoneyTransferRepository moneyTransferRepository;
     @Autowired
-    private AccountRepository accountReposiotry;
+    private AccountRepository accountRepository;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @PostMapping
     @Transactional
@@ -25,16 +29,17 @@ public class MoneyTransferController {
         Account destinationAccount;
 
         if(transferTO.getSourceAccountId() < transferTO.getDestinationAccountId()){
-            sourceAccount = accountReposiotry.getOneLocking(transferTO.getSourceAccountId());
-            destinationAccount = accountReposiotry.getOneLocking(transferTO.getDestinationAccountId());
+            sourceAccount = accountRepository.getOneLocking(transferTO.getSourceAccountId());
+            destinationAccount = accountRepository.getOneLocking(transferTO.getDestinationAccountId());
         }else {
-            destinationAccount = accountReposiotry.getOneLocking(transferTO.getDestinationAccountId());
-            sourceAccount = accountReposiotry.getOneLocking(transferTO.getSourceAccountId());
+            destinationAccount = accountRepository.getOneLocking(transferTO.getDestinationAccountId());
+            sourceAccount = accountRepository.getOneLocking(transferTO.getSourceAccountId());
         }
 
         Transfer transfer = new Transfer();
         transfer.exchange(sourceAccount, destinationAccount, transferTO.getCents());
-        moneyTransferRepository.save(transfer);
+        Transfer savedTransfer = moneyTransferRepository.save(transfer);
+        publisher.publishEvent(new TransferExchangedEvent(savedTransfer));
     }
 
     @GetMapping

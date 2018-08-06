@@ -1,7 +1,8 @@
 package com.semik.moneytransfer.account;
 
-import com.semik.moneytransfer.transfer.NoSufficientMeansException;
+import com.semik.moneytransfer.transfer.exception.NoSufficientMeansException;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.math3.util.ArithmeticUtils;
 
 import javax.persistence.Embeddable;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 @Entity
 @Embeddable
 @Data
+@NoArgsConstructor
 public class Account {
     @Id
     @GeneratedValue
@@ -22,9 +24,6 @@ public class Account {
     private String surname;
 
     private long balanceInCents = 0;
-
-    public Account() {
-    }
 
     public void charge(long cents) {
         if (balanceInCents - cents < 0) {

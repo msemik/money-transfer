@@ -21,4 +21,10 @@ public class TransferTO {
         this.destinationAccountId = destinationAccountId;
         this.cents = cents;
     }
+
+    public TransferTO(Transfer transfer) {
+        this.sourceAccountId = transfer.getSource().getAccountId();
+        this.destinationAccountId = transfer.getDestination().getAccountId();
+        this.cents = transfer.getCents();
+    }
 }

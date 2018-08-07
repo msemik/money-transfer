@@ -1,4 +1,4 @@
-package com.semik.moneytransfer.transfer;
+package com.semik.moneytransfer.transfer.model;
 
 import com.semik.moneytransfer.crosscutting.constraint.differentfieldvalues.DifferentFieldValues;
 import lombok.Value;

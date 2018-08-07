@@ -1,4 +1,4 @@
-package com.semik.moneytransfer.account;
+package com.semik.moneytransfer.account.exception;
 
 import com.semik.moneytransfer.crosscutting.exception.BusinessException;
 

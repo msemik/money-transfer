@@ -1,7 +1,7 @@
-package com.semik.moneytransfer.transfer;
+package com.semik.moneytransfer.transfer.model;
 
-import com.semik.moneytransfer.account.Account;
-import com.semik.moneytransfer.account.AccountState;
+import com.semik.moneytransfer.account.model.Account;
+import com.semik.moneytransfer.account.model.AccountState;
 import com.semik.moneytransfer.transfer.exception.TransferAmountMustBePositiveNumberException;
 import lombok.Data;
 import lombok.NoArgsConstructor;

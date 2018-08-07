@@ -1,4 +1,4 @@
-package com.semik.moneytransfer.account;
+package com.semik.moneytransfer.account.model;
 
 import lombok.Data;
 import lombok.NonNull;

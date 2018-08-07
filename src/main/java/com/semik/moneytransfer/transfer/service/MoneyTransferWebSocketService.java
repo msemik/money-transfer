@@ -1,8 +1,10 @@
-package com.semik.moneytransfer.transfer;
+package com.semik.moneytransfer.transfer.service;
 
 
-import com.semik.moneytransfer.account.AccountState;
+import com.semik.moneytransfer.account.model.AccountState;
 import com.semik.moneytransfer.transfer.event.TransferExchangedEvent;
+import com.semik.moneytransfer.transfer.model.Transfer;
+import com.semik.moneytransfer.transfer.model.TransferTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

@@ -1,10 +1,11 @@
 package com.semik.moneytransfer.transfer;
 
-import com.semik.moneytransfer.account.Account;
+import com.semik.moneytransfer.account.model.Account;
 import com.semik.moneytransfer.account.AccountRepository;
 import com.semik.moneytransfer.transfer.event.TransferExchangedEvent;
+import com.semik.moneytransfer.transfer.model.Transfer;
+import com.semik.moneytransfer.transfer.model.TransferTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

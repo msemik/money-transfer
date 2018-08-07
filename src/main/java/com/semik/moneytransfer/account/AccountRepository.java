@@ -1,5 +1,6 @@
 package com.semik.moneytransfer.account;
 
+import com.semik.moneytransfer.account.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;

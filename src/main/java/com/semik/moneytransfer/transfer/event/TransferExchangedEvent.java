@@ -1,6 +1,6 @@
 package com.semik.moneytransfer.transfer.event;
 
-import com.semik.moneytransfer.transfer.Transfer;
+import com.semik.moneytransfer.transfer.model.Transfer;
 import org.springframework.context.ApplicationEvent;
 
 public final class TransferExchangedEvent extends ApplicationEvent {

@@ -1,5 +1,6 @@
 package com.semik.moneytransfer.account;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +12,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("account")
+@RequiredArgsConstructor
 public class AccountController {
-    @Autowired
-    private AccountRepository accountRepository;
-
+    private final AccountRepository accountRepository;
 
     @GetMapping("{id}")
     public Optional<Account> findById(@PathVariable("id") Long id) {

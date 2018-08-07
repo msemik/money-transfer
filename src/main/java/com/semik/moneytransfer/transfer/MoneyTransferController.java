@@ -3,6 +3,7 @@ package com.semik.moneytransfer.transfer;
 import com.semik.moneytransfer.account.Account;
 import com.semik.moneytransfer.account.AccountRepository;
 import com.semik.moneytransfer.transfer.event.TransferExchangedEvent;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("money-transfer")
+@RequiredArgsConstructor
 public class MoneyTransferController {
-    @Autowired
-    private MoneyTransferRepository moneyTransferRepository;
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private ApplicationEventPublisher publisher;
+    private final MoneyTransferRepository moneyTransferRepository;
+    private final AccountRepository accountRepository;
+    private final ApplicationEventPublisher publisher;
 
     @PostMapping
     @Transactional

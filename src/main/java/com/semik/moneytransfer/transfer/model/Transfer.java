@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NamedQuery(name = "com.semik.moneytransfer.getAll", query = "from Transfer")
 @Data
 @NoArgsConstructor
-public class Transfer {
+public final class Transfer {
 
     @Id
     @GeneratedValue

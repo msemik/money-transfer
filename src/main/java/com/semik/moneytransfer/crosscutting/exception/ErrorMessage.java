@@ -5,7 +5,7 @@ import lombok.NonNull;
 import org.springframework.http.HttpStatus;
 
 @Data
-public class ErrorMessage {
+public final class ErrorMessage {
     private final @NonNull String message;
     private final long status;
 

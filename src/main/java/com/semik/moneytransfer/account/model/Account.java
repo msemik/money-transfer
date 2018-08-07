@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Embeddable
 @Data
 @NoArgsConstructor
-public class Account {
+public final class Account {
     @Id
     @GeneratedValue
     private Long id;

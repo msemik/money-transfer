@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Data
-public class AccountState {
+public final class AccountState {
     private @NonNull Long accountId;
 
     private long balanceInCents;

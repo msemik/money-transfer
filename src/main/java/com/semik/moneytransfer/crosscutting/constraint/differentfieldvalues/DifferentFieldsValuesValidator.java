@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
-public class DifferentFieldsValuesValidator implements ConstraintValidator<DifferentFieldValues, Object> {
+public final class DifferentFieldsValuesValidator implements ConstraintValidator<DifferentFieldValues, Object> {
     private DifferentFieldValues annotation;
 
     @Override

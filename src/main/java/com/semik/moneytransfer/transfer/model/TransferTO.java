@@ -7,7 +7,7 @@ import javax.validation.constraints.Positive;
 
 @Value
 @DifferentFieldValues(firstFieldName = "sourceAccountId", secondFieldName = "destinationAccountId")
-public class TransferTO {
+public final class TransferTO {
     private long sourceAccountId;
     private long destinationAccountId;
     @Positive

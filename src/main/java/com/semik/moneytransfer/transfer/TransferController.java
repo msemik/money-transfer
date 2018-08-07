@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
-@RequestMapping("money-transfer")
+@RequestMapping("transfer")
 @RequiredArgsConstructor
-public class MoneyTransferController {
-    private final MoneyTransferRepository moneyTransferRepository;
+public class TransferController {
+    private final TransferRepository transferRepository;
     private final AccountRepository accountRepository;
     private final ApplicationEventPublisher publisher;
 
@@ -38,13 +38,13 @@ public class MoneyTransferController {
 
         Transfer transfer = new Transfer();
         transfer.exchange(sourceAccount, destinationAccount, transferTO.getCents());
-        Transfer savedTransfer = moneyTransferRepository.save(transfer);
+        Transfer savedTransfer = transferRepository.save(transfer);
         publisher.publishEvent(new TransferExchangedEvent(savedTransfer));
     }
 
     @GetMapping
     public List<TransferTO> findAll() {
-        return moneyTransferRepository.findAllTO();
+        return transferRepository.findAllTO();
     }
 
 }

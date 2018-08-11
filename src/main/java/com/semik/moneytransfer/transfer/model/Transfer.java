@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name = "com.semik.moneytransfer.getAll", query = "from Transfer")
 @Data
-@NoArgsConstructor
 public final class Transfer {
 
     @Id
@@ -32,13 +31,18 @@ public final class Transfer {
 
     private long cents;
 
-    public void exchange(Account sourceAccount, Account destinationAccount, long cents) {
+    private Transfer(Account sourceAccount, Account destinationAccount, long cents) {
         this.source = sourceAccount.toAccountState();
         this.destination = destinationAccount.toAccountState();
         this.cents = cents;
-        validateTransferredAmount(cents);
+    }
+
+    public static Transfer exchange(Account sourceAccount, Account destinationAccount, long cents) {
+        Transfer transfer = new Transfer(sourceAccount, destinationAccount, cents);
+        transfer.validateTransferredAmount(cents);
         sourceAccount.charge(cents);
         destinationAccount.credit(cents);
+        return transfer;
     }
 
     private void validateTransferredAmount(long cents) {

@@ -36,8 +36,7 @@ public class TransferController {
             sourceAccount = accountRepository.getOneLocking(transferTO.getSourceAccountId());
         }
 
-        Transfer transfer = new Transfer();
-        transfer.exchange(sourceAccount, destinationAccount, transferTO.getCents());
+        Transfer transfer = Transfer.exchange(sourceAccount, destinationAccount, transferTO.getCents());
         Transfer savedTransfer = transferRepository.save(transfer);
         publisher.publishEvent(new TransferExchangedEvent(savedTransfer));
     }

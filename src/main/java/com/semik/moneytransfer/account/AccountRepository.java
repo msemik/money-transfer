@@ -1,17 +1,19 @@
 package com.semik.moneytransfer.account;
 
+import com.semik.moneytransfer.account.exception.NoSuchAccountException;
 import com.semik.moneytransfer.account.model.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import lombok.extern.slf4j.Slf4j;
+import org.jboss.logging.Logger;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import javax.persistence.LockModeType;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long> {
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("FROM Account WHERE id = :id")
-    Account getOneLocking(@Param("id") Long id);
+public interface AccountRepository extends ReactiveCrudRepository<Account, String>{
+    default Mono<Account> findByIdOrThrow(String accountId) {
+        return findById(accountId)
+                .switchIfEmpty(Mono.error(new NoSuchAccountException(accountId)));
+    }
 }

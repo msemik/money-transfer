@@ -5,44 +5,44 @@ import com.semik.moneytransfer.account.model.AccountState;
 import com.semik.moneytransfer.transfer.exception.TransferAmountMustBePositiveNumberException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
+import reactor.core.publisher.Mono;
 
-import javax.persistence.*;
 
-@Entity
-@NamedQuery(name = "com.semik.moneytransfer.getAll", query = "from Transfer")
+@Document(collection = "transfers")
 @Data
-@NoArgsConstructor
 public final class Transfer {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "accountId", column = @Column(name = "source_id")),
-            @AttributeOverride(name = "balanceInCents", column = @Column(name = "source_balance_in_cents"))})
     private AccountState source;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "accountId", column = @Column(name = "destination_id")),
-            @AttributeOverride(name = "balanceInCents", column = @Column(name = "destination_balance_in_cents"))})
     private AccountState destination;
 
     private long cents;
 
-    public void exchange(Account sourceAccount, Account destinationAccount, long cents) {
+    @Version
+    private Long version;
+
+    private Transfer(Account sourceAccount, Account destinationAccount, long cents) {
         this.source = sourceAccount.toAccountState();
         this.destination = destinationAccount.toAccountState();
         this.cents = cents;
-        validateTransferredAmount(cents);
-        sourceAccount.charge(cents);
-        destinationAccount.credit(cents);
     }
 
-    private void validateTransferredAmount(long cents) {
-        if(cents <= 0) {
+    public static Mono<Transfer> exchange(Account sourceAccount, Account destinationAccount, long cents) {
+        Transfer transfer = new Transfer(sourceAccount, destinationAccount, cents);
+        transfer.validate();
+        sourceAccount.charge(cents);
+        destinationAccount.credit(cents);
+        return Mono.just(transfer);
+    }
+
+    private void validate() {
+        if (cents <= 0) {
             throw new TransferAmountMustBePositiveNumberException();
         }
     }

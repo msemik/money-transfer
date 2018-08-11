@@ -3,13 +3,10 @@ package com.semik.moneytransfer.account.model;
 import lombok.Data;
 import lombok.NonNull;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 @Data
 public final class AccountState {
-    private @NonNull Long accountId;
-
+    private @NonNull
+    String accountId;
     private long balanceInCents;
 
 

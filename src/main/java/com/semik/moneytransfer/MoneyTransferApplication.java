@@ -3,6 +3,8 @@ package com.semik.moneytransfer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -39,5 +41,10 @@ public class MoneyTransferApplication {
 						.allowedOrigins("http://localhost:4200");
 			}
 		};
+	}
+
+	@Bean
+	MongoTransactionManager transactionManager(MongoDbFactory dbFactory) {
+		return new MongoTransactionManager(dbFactory);
 	}
 }

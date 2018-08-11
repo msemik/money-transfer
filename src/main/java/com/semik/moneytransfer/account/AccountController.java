@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.Optional;
+import java.math.BigInteger;
 
 @RestController
 @RequestMapping("account")
@@ -17,12 +18,12 @@ public class AccountController {
     private final AccountRepository accountRepository;
 
     @GetMapping("{id}")
-    public Optional<Account> findById(@PathVariable("id") Long id) {
+    public Mono<Account> findById(@PathVariable("id") String id) {
         return accountRepository.findById(id);
     }
 
     @GetMapping
-    public List<Account> findAll() {
+    public Flux<Account> findAll() {
         return accountRepository.findAll();
     }
 }
